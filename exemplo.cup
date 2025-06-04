@@ -1,13 +1,8 @@
 import java_cup.runtime.*;
 
-/* 
-=> parser code {: ... :}:
-   Permite incluir um método main() diretamente dentro da 
-   classe do analisador sintático, dispensando a criação de 
-   uma classe principal (Main) com o método main().
-
-   O próprio analisador sintático será responsável por iniciar 
-   a execução.
+/*
+  parser code {: ... :}:
+  Permite incluir um método main() diretamente na classe do parser.
 */
 parser code {:
   public static void main(String[] args) throws Exception {
@@ -16,35 +11,32 @@ parser code {:
   }
 :}
 
+// MODIFICADO!!!: Acrescentados os novos tokens para operadores
 terminal Integer INTEIRO;
-terminal MAIS, MENOS, MENOSUNARIO, PTVIRG, PARENTESQ, PARENTDIR;
+terminal MAIS, MENOS, MULT, DIV, RESTO, POT, MENOSUNARIO, PTVIRG, PARENTESQ, PARENTDIR;
 
 non terminal inicio;
 non terminal Integer expr;
 
+// MODIFICADO!!!!: Acrescentadas precedências para operadores novos
 precedence left MAIS, MENOS;
-precedence right MENOSUNARIO; // Menos unário com maior precedência, associatividade à direita.
+precedence left MULT, DIV, RESTO; // MODIFICADO
+precedence right POT;              // MODIFICADO
+precedence right MENOSUNARIO;
 
 start with inicio;
 
 inicio ::= expr:e PTVIRG {: System.out.println(e); :}
          ;
 
-expr ::= expr:a MAIS expr:b             {: RESULT = a.intValue() + b.intValue(); :}
-       | expr:a MENOS expr:b            {: RESULT = a.intValue() - b.intValue(); :}
-       | MENOS expr:a                   {: RESULT = -a; :} %prec MENOSUNARIO       
-       | PARENTESQ expr:a PARENTDIR     {: RESULT = a.intValue(); :}
-       | INTEIRO:a                      {: RESULT = a.intValue(); :}
+// MODIFICADO!!!!!: Acrescentadas regras para MULT, DIV, RESTO, POT
+expr ::= expr:a MAIS expr:b         {: RESULT = a + b; :}
+       | expr:a MENOS expr:b        {: RESULT = a - b; :}
+       | expr:a MULT expr:b         {: RESULT = a * b; :} // MODIFICADO
+       | expr:a DIV expr:b          {: RESULT = a / b; :} // MODIFICADO
+       | expr:a RESTO expr:b        {: RESULT = a % b; :} // MODIFICADO
+       | expr:a POT expr:b          {: RESULT = (int)Math.pow(a, b); :} // MODIFICADO
+       | MENOS expr:a               {: RESULT = -a; :} %prec MENOSUNARIO
+       | PARENTESQ expr:a PARENTDIR {: RESULT = a; :}
+       | INTEIRO:a                  {: RESULT = a; :}
        ;
-
-/*
-Usar %prec:
-  É importante quando um mesmo token tem dois significados 
-  diferentes (como o - unário e binário).
-  Evita conflitos de precedência.
-  Garante a construção correta da árvore sintática e a avaliação da expressão.
-
-=> Usar %prec MENOSUNARIO para informar:
-   "Essa regra tem a precedência do token MENOSUNARIO, 
-    que foi declarado separadamente na seção de precedência".
-*/
