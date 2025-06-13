@@ -1,0 +1,22 @@
+import java_cup.runtime.*;
+
+parser code {:
+  public static void main(String[] args) throws Exception {
+    System.out.println("Parser funcionando!");
+  }
+:}
+
+parser SQLParser;
+
+terminal SELECT, FROM, WHERE, VIRGULA, IGUAL, PTVIRG;
+terminal String ID;
+terminal Integer NUM;
+
+non terminal consulta, lista_colunas;
+
+start with consulta;
+
+consulta ::= SELECT lista_colunas FROM ID PTVIRG ;
+
+lista_colunas ::= ID
+               | lista_colunas VIRGULA ID ;

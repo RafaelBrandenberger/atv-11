@@ -27,6 +27,10 @@ inteiro = {digito}+
           }
 "+"       { return new Symbol(sym.MAIS); }
 "-"       { return new Symbol(sym.MENOS); }
+"*"       { return new Symbol(sym.MULT); }
+"/"       { return new Symbol(sym.DIV); }
+"%"       { return new Symbol(sym.MOD); }
+"^"       { return new Symbol(sym.POW); }
 "("       { return new Symbol(sym.PARENTESQ); }
 ")"       { return new Symbol(sym.PARENTDIR); }
 ";"       { return new Symbol(sym.PTVIRG); }
@@ -35,5 +39,5 @@ inteiro = {digito}+
 .         { System.err.println("\n Caractere inválido: " + yytext() +
                                "\n Linha: " + yyline +
                                "\n Coluna: " + yycolumn + "\n"); 
-            return null; 
-          }
+             return null; 
+           }

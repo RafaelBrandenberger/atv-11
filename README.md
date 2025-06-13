@@ -205,3 +205,5 @@ java -cp .:jcup.jar MeuParser ./entrada.txt
 
 12. Executar o `executar.sh`:
 - `./executar.sh`
+
+13. Remover lixo `rm -rf *.class *.java~ jcup.jar SQLParser.java sym.java jflex.jar SQLScanner.java`

@@ -1,0 +1,2 @@
+SELECT nome, idade FROM usuarios WHERE idade = 25;
+SELECT produto FROM produtos;

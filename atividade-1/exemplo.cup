@@ -5,7 +5,6 @@ import java_cup.runtime.*;
    Permite incluir um método main() diretamente dentro da 
    classe do analisador sintático, dispensando a criação de 
    uma classe principal (Main) com o método main().
-
    O próprio analisador sintático será responsável por iniciar 
    a execução.
 */
@@ -17,12 +16,14 @@ parser code {:
 :}
 
 terminal Integer INTEIRO;
-terminal MAIS, MENOS, MENOSUNARIO, PTVIRG, PARENTESQ, PARENTDIR;
+terminal MAIS, MENOS, MULT, DIV, MOD, POW, MENOSUNARIO, PTVIRG, PARENTESQ, PARENTDIR;
 
 non terminal inicio;
 non terminal Integer expr;
 
 precedence left MAIS, MENOS;
+precedence left MULT, DIV, MOD;
+precedence right POW;
 precedence right MENOSUNARIO; // Menos unário com maior precedência, associatividade à direita.
 
 start with inicio;
@@ -32,6 +33,10 @@ inicio ::= expr:e PTVIRG {: System.out.println(e); :}
 
 expr ::= expr:a MAIS expr:b             {: RESULT = a.intValue() + b.intValue(); :}
        | expr:a MENOS expr:b            {: RESULT = a.intValue() - b.intValue(); :}
+       | expr:a MULT expr:b             {: RESULT = a.intValue() * b.intValue(); :}
+       | expr:a DIV expr:b              {: RESULT = a.intValue() / b.intValue(); :}
+       | expr:a MOD expr:b              {: RESULT = a.intValue() % b.intValue(); :}
+       | expr:a POW expr:b              {: RESULT = (int)Math.pow(a.intValue(), b.intValue()); :}
        | MENOS expr:a                   {: RESULT = -a; :} %prec MENOSUNARIO       
        | PARENTESQ expr:a PARENTDIR     {: RESULT = a.intValue(); :}
        | INTEIRO:a                      {: RESULT = a.intValue(); :}

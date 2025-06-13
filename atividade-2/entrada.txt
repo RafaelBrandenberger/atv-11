@@ -1,0 +1,12 @@
+{
+  "nome": "João",
+  "idade": 30,
+  "ativo": true,
+  "filhos": ["Ana", "Bia"],
+  "endereco": {
+    "cidade": "São Paulo",
+    "cep": "12345-678"
+  },
+  "notas": [7.5, 8.0, 9.1],
+  "nulo": null
+}

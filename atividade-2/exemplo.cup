@@ -1,0 +1,51 @@
+import java_cup.runtime.*;
+
+parser code {:
+  public static void main(String[] args) throws Exception {
+    Compilador compilador = new Compilador();
+    compilador.compilar(args[0]);
+  }
+:}
+
+terminal String STRING;
+terminal Double NUMBER;
+terminal TRUE, FALSE, NULL;
+terminal LBRACE, RBRACE, LBRACKET, RBRACKET, COLON, COMMA;
+
+non terminal Object json, valor, objeto, membros, par, array, elementos;
+
+start with json;
+
+json ::= valor:v {: System.out.println("JSON válido: " + v); :};
+
+valor ::=
+    STRING:s         {: RESULT = s; :}
+  | NUMBER:n         {: RESULT = n; :}
+  | objeto:o         {: RESULT = o; :}
+  | array:a          {: RESULT = a; :}
+  | TRUE             {: RESULT = true; :}
+  | FALSE            {: RESULT = false; :}
+  | NULL             {: RESULT = null; :}
+  ;
+
+objeto ::=
+    LBRACE RBRACE         {: RESULT = new java.util.LinkedHashMap<>(); :}
+  | LBRACE membros:m RBRACE {: RESULT = m; :}
+  ;
+
+membros ::=
+    par:p                         {: java.util.Map map = new java.util.LinkedHashMap<>(); map.put(((Object[])p)[0], ((Object[])p)[1]); RESULT = map; :}
+  | membros:m COMMA par:p         {: ((java.util.Map)m).put(((Object[])p)[0], ((Object[])p)[1]); RESULT = m; :}
+  ;
+
+par ::= STRING:k COLON valor:v {: RESULT = new Object[]{k, v}; :};
+
+array ::=
+    LBRACKET RBRACKET             {: RESULT = new java.util.ArrayList<>(); :}
+  | LBRACKET elementos:els RBRACKET {: RESULT = els; :}
+  ;
+
+elementos ::=
+    valor:v                        {: java.util.List list = new java.util.ArrayList<>(); list.add(v); RESULT = list; :}
+  | elementos:els COMMA valor:v    {: ((java.util.List)els).add(v); RESULT = els; :}
+  ;
