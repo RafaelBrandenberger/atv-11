@@ -1,2 +1,3 @@
-SELECT nome, idade FROM usuarios WHERE idade = 25;
-SELECT produto FROM produtos;
+SELECT nome FROM usuarios WHERE id = 1;
+SELECT produto FROM estoque WHERE codigo = 123;
+SELECT email FROM clientes WHERE id = 42;

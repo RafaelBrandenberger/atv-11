@@ -2,21 +2,26 @@ import java_cup.runtime.*;
 
 parser code {:
   public static void main(String[] args) throws Exception {
-    System.out.println("Parser funcionando!");
+    Compilador compilador = new Compilador();
+    compilador.compilar(args[0]);
   }
 :}
 
-parser SQLParser;
-
-terminal SELECT, FROM, WHERE, VIRGULA, IGUAL, PTVIRG;
+terminal SELECT, FROM, WHERE, IGUAL, PTVIRG;
 terminal String ID;
 terminal Integer NUM;
 
-non terminal consulta, lista_colunas;
+non terminal comando;
+non terminal String tabela, campo;
+non terminal Integer valor;
 
-start with consulta;
+start with comando;
 
-consulta ::= SELECT lista_colunas FROM ID PTVIRG ;
-
-lista_colunas ::= ID
-               | lista_colunas VIRGULA ID ;
+comando ::= SELECT ID:c FROM ID:t WHERE ID:campo IGUAL NUM:valor PTVIRG
+            {: 
+               System.out.println("Consulta:");
+               System.out.println("  Campo: " + c);
+               System.out.println("  Tabela: " + t);
+               System.out.println("  Filtro: " + campo + " = " + valor);
+             :}
+;

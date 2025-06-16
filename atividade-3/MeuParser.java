@@ -29,9 +29,7 @@ public class MeuParser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\006\000\002\002\004\000\002\002\011\000\002\002" +
-    "\007\000\002\003\003\000\002\003\005\000\002\005\005" +
-    "" });
+    "\000\002\000\002\002\004\000\002\002\013" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -39,15 +37,12 @@ public class MeuParser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\021\000\004\004\005\001\002\000\004\002\023\001" +
-    "\002\000\004\012\006\001\002\000\006\005\ufffe\007\ufffe" +
-    "\001\002\000\006\005\010\007\011\001\002\000\004\012" +
-    "\013\001\002\000\004\012\012\001\002\000\006\005\ufffd" +
-    "\007\ufffd\001\002\000\006\006\015\011\014\001\002\000" +
-    "\004\002\uffff\001\002\000\004\012\016\001\002\000\004" +
-    "\010\021\001\002\000\004\011\020\001\002\000\004\002" +
-    "\000\001\002\000\004\013\022\001\002\000\004\011\ufffc" +
-    "\001\002\000\004\002\001\001\002" });
+    "\000\014\000\004\004\005\001\002\000\004\002\016\001" +
+    "\002\000\004\011\006\001\002\000\004\005\007\001\002" +
+    "\000\004\011\010\001\002\000\004\006\011\001\002\000" +
+    "\004\011\012\001\002\000\004\007\013\001\002\000\004" +
+    "\012\014\001\002\000\004\010\015\001\002\000\004\002" +
+    "\000\001\002\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -55,12 +50,11 @@ public class MeuParser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\021\000\004\002\003\001\001\000\002\001\001\000" +
-    "\004\003\006\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\005\016\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001" });
+    "\000\014\000\004\002\003\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -130,7 +124,7 @@ class CUP$MeuParser$actions {
       switch (CUP$MeuParser$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // $START ::= consulta EOF 
+          case 0: // $START ::= comando EOF 
             {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-1)).left;
@@ -144,71 +138,28 @@ class CUP$MeuParser$actions {
           return CUP$MeuParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // consulta ::= SELECT lista_colunas FROM ID WHERE condicao PTVIRG 
+          case 1: // comando ::= SELECT ID FROM ID WHERE ID IGUAL NUM PTVIRG 
             {
               Object RESULT =null;
-		int whrleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-3)).left;
-		int whrright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-3)).right;
-		String whr = (String)((java_cup.runtime.Symbol) CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-3)).value;
-		int condleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-1)).left;
-		int condright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-1)).right;
-		Object cond = (Object)((java_cup.runtime.Symbol) CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-1)).value;
-		 System.out.println("Consulta válida! Tabela: " + whr + ", colunas: " + ((java.util.List<?>)RESULT).get(0) + ", condição: " + cond); 
-              CUP$MeuParser$result = parser.getSymbolFactory().newSymbol("consulta",0, ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-6)), ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()), RESULT);
-            }
-          return CUP$MeuParser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // consulta ::= SELECT lista_colunas FROM ID PTVIRG 
-            {
-              Object RESULT =null;
-		int whrleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-1)).left;
-		int whrright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-1)).right;
-		String whr = (String)((java_cup.runtime.Symbol) CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-1)).value;
-		 System.out.println("Consulta válida! Tabela: " + whr + ", colunas: " + RESULT); 
-              CUP$MeuParser$result = parser.getSymbolFactory().newSymbol("consulta",0, ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-4)), ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()), RESULT);
-            }
-          return CUP$MeuParser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // lista_colunas ::= ID 
-            {
-              Object RESULT =null;
-		int idleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()).left;
-		int idright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()).right;
-		String id = (String)((java_cup.runtime.Symbol) CUP$MeuParser$stack.peek()).value;
-		 java.util.List<String> l = new java.util.ArrayList<>(); l.add(id); RESULT = l; 
-              CUP$MeuParser$result = parser.getSymbolFactory().newSymbol("lista_colunas",1, ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()), RESULT);
-            }
-          return CUP$MeuParser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // lista_colunas ::= lista_colunas VIRGULA ID 
-            {
-              Object RESULT =null;
-		int lleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-2)).left;
-		int lright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-2)).right;
-		Object l = (Object)((java_cup.runtime.Symbol) CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-2)).value;
-		int idleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()).left;
-		int idright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()).right;
-		String id = (String)((java_cup.runtime.Symbol) CUP$MeuParser$stack.peek()).value;
-		 ((java.util.List<String>)l).add(id); RESULT = l; 
-              CUP$MeuParser$result = parser.getSymbolFactory().newSymbol("lista_colunas",1, ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-2)), ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()), RESULT);
-            }
-          return CUP$MeuParser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // condicao ::= ID IGUAL NUM 
-            {
-              Object RESULT =null;
-		int idleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-2)).left;
-		int idright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-2)).right;
-		String id = (String)((java_cup.runtime.Symbol) CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-2)).value;
-		int numleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()).left;
-		int numright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()).right;
-		Integer num = (Integer)((java_cup.runtime.Symbol) CUP$MeuParser$stack.peek()).value;
-		 RESULT = id + " = " + num; 
-              CUP$MeuParser$result = parser.getSymbolFactory().newSymbol("condicao",3, ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-2)), ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()), RESULT);
+		int cleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-7)).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-7)).right;
+		String c = (String)((java_cup.runtime.Symbol) CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-7)).value;
+		int tleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-5)).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-5)).right;
+		String t = (String)((java_cup.runtime.Symbol) CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-5)).value;
+		int campoleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-3)).left;
+		int camporight = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-3)).right;
+		String campo = (String)((java_cup.runtime.Symbol) CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-3)).value;
+		int valorleft = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-1)).left;
+		int valorright = ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-1)).right;
+		Integer valor = (Integer)((java_cup.runtime.Symbol) CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-1)).value;
+		 
+               System.out.println("Consulta:");
+               System.out.println("  Campo: " + c);
+               System.out.println("  Tabela: " + t);
+               System.out.println("  Filtro: " + campo + " = " + valor);
+             
+              CUP$MeuParser$result = parser.getSymbolFactory().newSymbol("comando",0, ((java_cup.runtime.Symbol)CUP$MeuParser$stack.elementAt(CUP$MeuParser$top-8)), ((java_cup.runtime.Symbol)CUP$MeuParser$stack.peek()), RESULT);
             }
           return CUP$MeuParser$result;
 
